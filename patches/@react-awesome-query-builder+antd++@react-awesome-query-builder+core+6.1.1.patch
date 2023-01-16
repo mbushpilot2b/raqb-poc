@@ -1,0 +1,51 @@
+diff --git a/node_modules/@react-awesome-query-builder/antd/node_modules/@react-awesome-query-builder/core/esm/config/index.js b/node_modules/@react-awesome-query-builder/antd/node_modules/@react-awesome-query-builder/core/esm/config/index.js
+index 16f7126..5d7ba8f 100644
+--- a/node_modules/@react-awesome-query-builder/antd/node_modules/@react-awesome-query-builder/core/esm/config/index.js
++++ b/node_modules/@react-awesome-query-builder/antd/node_modules/@react-awesome-query-builder/core/esm/config/index.js
+@@ -189,7 +189,7 @@ var operators = {
+     jsonLogic: "in",
+     _jsonLogicIsRevArgs: true,
+     valueSources: ["value"],
+-    elasticSearchQueryType: "regexp"
++    elasticSearchQueryType: "wildcard"
+   },
+   not_like: {
+     isNotOp: true,
+@@ -213,7 +213,8 @@ var operators = {
+     }, false),
+     jsonLogic: undefined,
+     // not supported
+-    valueSources: ["value"]
++    valueSources: ["value"],
++    elasticSearchQueryType: "wildcard"
+   },
+   ends_with: {
+     label: "Ends with",
+@@ -226,7 +227,8 @@ var operators = {
+     }, false),
+     jsonLogic: undefined,
+     // not supported
+-    valueSources: ["value"]
++    valueSources: ["value"],
++    elasticSearchQueryType: "wildcard"
+   },
+   between: {
+     label: "Between",
+@@ -1045,6 +1047,17 @@ var types = {
+       }
+     }
+   },
++  dateVerbose: {
++    defaultOperator: "equal",
++    widgets: {
++      date: {
++        operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal", "between", "not_between",
++        // "is_empty",
++        // "is_not_empty",
++        "is_null", "is_not_null"]
++      }
++    }
++  },
+   time: {
+     defaultOperator: "equal",
+     widgets: {

@@ -115,8 +115,6 @@ export default (skin: string) => {
     }
   };
 
-  console.log("operators", operators);
-
   const widgets: Widgets = {
     ...InitialConfig.widgets,
     // examples of  overriding
@@ -199,7 +197,39 @@ export default (skin: string) => {
             }
           }
         }
-      }
+      },
+    }),
+    booleanSelect: merge(InitialConfig.types.select, {
+      widgets: {
+        select: {
+          widgetProps: {
+            hideOperator: true,
+            operatorInlineLabel: "is"
+          },
+          opProps: {
+            equal: {
+              label: "is"
+            },
+            not_equal: {
+              label: "is not"
+            }
+          }
+        }
+      },
+    }),
+    dateVerbose: merge(InitialConfig.types.dateVerbose, {
+      widgets: {
+        date: {
+          opProps: {
+            greater: {
+              label: "after"
+            },
+            less: {
+              label: "before"
+            }
+          }
+        }
+      },
     })
   };
 
@@ -364,6 +394,18 @@ export default (skin: string) => {
         labelNo: "-"
       }
     },
+    inCCIS2: {
+      label: "In CCIS-2",
+      type: "booleanSelect",
+      valueSources: ["value"],
+      fieldSettings: {
+        showSearch: true,
+        listValues: [
+          { value: "true", title: "True" },
+          { value: "false", title: "False" }
+        ]
+      },
+    },
     notes: {
       label: "Clinical Notes",
       type: "!group",
@@ -408,7 +450,7 @@ export default (skin: string) => {
     },
     admissionDate: {
       label: "Admission Date",
-      type: "date"
+      type: "dateVerbose"
     },
     dischargeDate: {
       label: "Discharge Date",
@@ -423,13 +465,6 @@ export default (skin: string) => {
       valueSources: ["value"],
       fieldSettings: {
         showSearch: true,
-        // * old format:
-        // listValues: {
-        //     yellow: 'Yellow',
-        //     green: 'Green',
-        //     orange: 'Orange'
-        // },
-        // * new format:
         listValues: [
           { value: "m", title: "Male" },
           { value: "f", title: "Female" }

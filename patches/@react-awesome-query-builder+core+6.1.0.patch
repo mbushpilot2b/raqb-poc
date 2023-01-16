@@ -1,0 +1,77 @@
+diff --git a/node_modules/@react-awesome-query-builder/core/esm/config/index.js b/node_modules/@react-awesome-query-builder/core/esm/config/index.js
+index 16f7126..db325b0 100644
+--- a/node_modules/@react-awesome-query-builder/core/esm/config/index.js
++++ b/node_modules/@react-awesome-query-builder/core/esm/config/index.js
+@@ -189,7 +189,7 @@ var operators = {
+     jsonLogic: "in",
+     _jsonLogicIsRevArgs: true,
+     valueSources: ["value"],
+-    elasticSearchQueryType: "regexp"
++    elasticSearchQueryType: "wildcard"
+   },
+   not_like: {
+     isNotOp: true,
+diff --git a/node_modules/@react-awesome-query-builder/core/esm/export/elasticSearch.js b/node_modules/@react-awesome-query-builder/core/esm/export/elasticSearch.js
+index f450237..d5685eb 100644
+--- a/node_modules/@react-awesome-query-builder/core/esm/export/elasticSearch.js
++++ b/node_modules/@react-awesome-query-builder/core/esm/export/elasticSearch.js
+@@ -94,6 +94,18 @@ function buildEsWildcardParameters(value) {
+   };
+ }
+ 
++function buildESStartsWithParameters(value) {
++  return {
++    value: "*" + value
++  }
++}
++
++function buildESEndsWithParameters(value) {
++  return {
++    value: value + "*"
++  }
++}
++
+ /**
+  * Takes the match type string from awesome query builder like 'greater_or_equal' and
+  * returns the ES occurrence required for bool queries
+@@ -161,7 +173,9 @@ function determineField(fieldName, config) {
+   return fieldName;
+ }
+ function buildParameters(queryType, value, operator, fieldName, config) {
+-  var textField = determineField(fieldName, config);
++  var textField = determineField(fieldName, config)
++  console.log("Query type c-esm: ", queryType)
++  console.log("Operator type c-esm: ", operator)
+   switch (queryType) {
+     case "filter":
+       //todo: elasticSearchScript - not used
+@@ -184,7 +198,12 @@ function buildParameters(queryType, value, operator, fieldName, config) {
+     case "range":
+       return _defineProperty({}, fieldName, buildEsRangeParameters(value, operator));
+     case "wildcard":
+-      return _defineProperty({}, fieldName, buildEsWildcardParameters(value[0]));
++      if(operator === 'like')
++        return _defineProperty({}, fieldName, buildEsWildcardParameters(value[0]));
++      if(operator === 'starts_with')
++        return _defineProperty({}, fieldName, buildESStartsWithParameters(value[0]));
++      if(operator === "ends_with")
++        return _defineProperty({}, fieldName, buildESEndsWithParameters(value[0]));
+     case "regexp":
+       return _defineProperty({}, fieldName, buildRegexpParameters(value[0]));
+     default:
+@@ -202,6 +221,7 @@ function buildParameters(queryType, value, operator, fieldName, config) {
+  * @private
+  */
+ function buildEsRule(fieldName, value, operator, config, valueSrc) {
++  console.log('buildEsRule() - config ', config )
+   if (!fieldName || !operator || value == undefined) return undefined; // rule is not fully entered
+   var op = operator;
+   var opConfig = config.operators[op];
+@@ -283,6 +303,7 @@ function buildEsGroup(children, conjunction, not, recursiveFxn, config) {
+   };
+ }
+ export function elasticSearchFormat(tree, config) {
++  console.log('elasticSearchFormat() - config ', config)
+   // -- format the es dsl here
+   if (!tree) return undefined;
+   var type = tree.get("type");
