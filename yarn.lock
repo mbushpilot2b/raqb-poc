@@ -1196,71 +1196,6 @@
   dependencies:
     "@floating-ui/core" "^1.0.5"
 
-"@fluentui/dom-utilities@^2.2.4":
-  version "2.2.4"
-  resolved "https://registry.npmjs.org/@fluentui/dom-utilities/-/dom-utilities-2.2.4.tgz"
-  integrity sha512-X4fN5zbvAETw9LE8bw9x5otKcpS3A3cB9wn/BookbTD4hkBESx06SzmX/WdabFq7qqbDqbURiQMpmdGUUlLsqw==
-  dependencies:
-    "@fluentui/set-version" "^8.2.4"
-    tslib "^2.1.0"
-
-"@fluentui/font-icons-mdl2@^8.2.0":
-  version "8.5.6"
-  resolved "https://registry.npmjs.org/@fluentui/font-icons-mdl2/-/font-icons-mdl2-8.5.6.tgz"
-  integrity sha512-6yGZcc/fIeT/HDPjnn003TNuC/EUoiZTiyZQyPSSQl5PeOzkmNOqG8nq/l8s+qXHs4uZC/FH081vxPxSwA2qWA==
-  dependencies:
-    "@fluentui/set-version" "^8.2.4"
-    "@fluentui/style-utilities" "^8.8.5"
-    "@fluentui/utilities" "^8.13.5"
-    tslib "^2.1.0"
-
-"@fluentui/merge-styles@^8.5.5":
-  version "8.5.5"
-  resolved "https://registry.npmjs.org/@fluentui/merge-styles/-/merge-styles-8.5.5.tgz"
-  integrity sha512-+cyN28iRAn8BWlZkMSEWzXpsJJiy3wWFxdJx5UnvU3iLK1slwog94inJak/BmnQKk3dFXK9vVPtDp2s3l+2/hg==
-  dependencies:
-    "@fluentui/set-version" "^8.2.4"
-    tslib "^2.1.0"
-
-"@fluentui/set-version@^8.2.4":
-  version "8.2.4"
-  resolved "https://registry.npmjs.org/@fluentui/set-version/-/set-version-8.2.4.tgz"
-  integrity sha512-v12VUrpThYcJESFrnu3LdL7/s957hoSCJ3t8C014Hp2IOmk3dnZRZJymf1k/RAOXztS4w9dF2Zhs8uP31qwcZw==
-  dependencies:
-    tslib "^2.1.0"
-
-"@fluentui/style-utilities@^8.8.5":
-  version "8.8.5"
-  resolved "https://registry.npmjs.org/@fluentui/style-utilities/-/style-utilities-8.8.5.tgz"
-  integrity sha512-qUi+1a2v0nWo3LB4c13Qf81qQH1yO9YHAgfbRNLqs4w7Oie7NDBDkq7UgRmLErpSVEafvlcCZeCSKW5pvSxz5w==
-  dependencies:
-    "@fluentui/merge-styles" "^8.5.5"
-    "@fluentui/set-version" "^8.2.4"
-    "@fluentui/theme" "^2.6.21"
-    "@fluentui/utilities" "^8.13.5"
-    "@microsoft/load-themed-styles" "^1.10.26"
-    tslib "^2.1.0"
-
-"@fluentui/theme@^2.6.21":
-  version "2.6.21"
-  resolved "https://registry.npmjs.org/@fluentui/theme/-/theme-2.6.21.tgz"
-  integrity sha512-jqPOo375pt1bQ4WuzP2GP5gfgeBK/PDHUf4+DxDTZ9y0TXp8KxV4jCp5Rq2rnVYlXi51JQ2Y+snFtMDcMTyfRQ==
-  dependencies:
-    "@fluentui/merge-styles" "^8.5.5"
-    "@fluentui/set-version" "^8.2.4"
-    "@fluentui/utilities" "^8.13.5"
-    tslib "^2.1.0"
-
-"@fluentui/utilities@^8.13.5":
-  version "8.13.5"
-  resolved "https://registry.npmjs.org/@fluentui/utilities/-/utilities-8.13.5.tgz"
-  integrity sha512-YusKxwTEQmsJidEWxn8blf5ehBmBDMZDrOjQkSX4piCvi/57MfigQZ57L3Bdic8kDKsabVtS1IVMHLZzGy4zcQ==
-  dependencies:
-    "@fluentui/dom-utilities" "^2.2.4"
-    "@fluentui/merge-styles" "^8.5.5"
-    "@fluentui/set-version" "^8.2.4"
-    tslib "^2.1.0"
-
 "@fortawesome/fontawesome-common-types@6.2.1":
   version "6.2.1"
   resolved "https://registry.npmjs.org/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.2.1.tgz"
@@ -1339,11 +1274,6 @@
   version "2.0.4"
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
-
-"@microsoft/load-themed-styles@^1.10.26":
-  version "1.10.295"
-  resolved "https://registry.npmjs.org/@microsoft/load-themed-styles/-/load-themed-styles-1.10.295.tgz"
-  integrity sha512-W+IzEBw8a6LOOfRJM02dTT7BDZijxm+Z7lhtOAz1+y9vQm1Kdz9jlAO+qCEKsfxtUOmKilW8DIRqFw2aUgKeGg==
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
@@ -2105,11 +2035,6 @@ bonjour-service@^1.0.11:
     dns-equal "^1.0.0"
     fast-deep-equal "^3.1.3"
     multicast-dns "^7.2.5"
-
-bootstrap@^5.1.3:
-  version "5.2.3"
-  resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.2.3.tgz"
-  integrity sha512-cEKPM+fwb3cT8NzQZYEu4HilJ3anCrWqh3CHAok1p9jXqMPsPTBhU25fBckEJHJ/p+tTxTFTsFQGM+gaHpi3QQ==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -5035,7 +4960,7 @@ totalist@^1.0.0:
   resolved "https://registry.npmjs.org/totalist/-/totalist-1.1.0.tgz"
   integrity sha512-gduQwd1rOdDMGxFG1gEvhV88Oirdo2p+KjoYFU7k2g+i7n6AFFbDQ5kMPUsW0pNbfQsB/cwXvT1i4Bue0s9g5g==
 
-tslib@^2.1.0, tslib@^2.3.0:
+tslib@^2.3.0:
   version "2.4.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-2.4.1.tgz"
   integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
