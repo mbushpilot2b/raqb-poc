@@ -15,7 +15,6 @@ import {
   Funcs
   //DateTimeFieldSettings,
 } from "@react-awesome-query-builder/core";
-import { operators as OP } from "@react-awesome-query-builder/core";
 import {
   BasicConfig,
   // types:

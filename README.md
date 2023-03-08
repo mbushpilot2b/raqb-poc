@@ -22,7 +22,7 @@ Start the app `pnpm start`
 [![npm](https://img.shields.io/npm/v/@react-awesome-query-builder/examples.svg)](https://www.npmjs.com/package/@react-awesome-query-builder/examples)
 
 Demo app, uses local library with hot reload.  
-You can switch between AntDesign, MUI, Bootstrap and vanilla widgets.  
+This app uses AntDesign widgets.  
 Uses complex config to demonstrate anvanced usage.  
 **Uses TypeScript.**
 

@@ -15,18 +15,8 @@ const isAnalyze = process.env.ANALYZE == "1";
 const isSeparateCss = process.env.CSS == "1";
 const EXAMPLES = __dirname;
 const CORE_MODULES = path.resolve(EXAMPLES, '../core/modules/');
-const UI_MODULES = path.resolve(EXAMPLES, '../ui/modules/');
 const ANTD_MODULES = path.resolve(EXAMPLES, '../antd/modules/');
-const MUI_MODULES = path.resolve(EXAMPLES, '../mui/modules/');
-const MATERIAL_MODULES = path.resolve(EXAMPLES, '../material/modules/');
-const BOOTSTRAP_MODULES = path.resolve(EXAMPLES, '../bootstrap/modules/');
-const FLUENT_MODULES = path.resolve(EXAMPLES, '../fluent/modules/');
-const UI_CSS = path.resolve(EXAMPLES, '../ui/styles/');
 const ANTD_CSS = path.resolve(EXAMPLES, '../antd/styles/');
-const MUI_CSS = path.resolve(EXAMPLES, '../mui/styles/');
-const MATERIAL_CSS = path.resolve(EXAMPLES, '../material/styles/');
-const BOOTSTRAP_CSS = path.resolve(EXAMPLES, '../bootstrap/styles/');
-const FLUENT_CSS = path.resolve(EXAMPLES, '../fluent/styles/');
 const DIST = path.resolve(EXAMPLES, './build');
 const isMono = fs.existsSync(CORE_MODULES);
 
@@ -43,20 +33,10 @@ let plugins = [
 ];
 
 let aliases = isMono ? {
-    '@react-awesome-query-builder/ui/css': UI_CSS,
     '@react-awesome-query-builder/antd/css': ANTD_CSS,
-    '@react-awesome-query-builder/mui/css': MUI_CSS,
-    '@react-awesome-query-builder/material/css': MATERIAL_CSS,
-    '@react-awesome-query-builder/bootstrap/css': BOOTSTRAP_CSS,
-    '@react-awesome-query-builder/fluent/css': FLUENT_CSS,
-    
     '@react-awesome-query-builder/core': CORE_MODULES,
-    '@react-awesome-query-builder/ui': UI_MODULES,
     '@react-awesome-query-builder/antd': ANTD_MODULES,
-    '@react-awesome-query-builder/mui': MUI_MODULES,
-    '@react-awesome-query-builder/material': MATERIAL_MODULES,
-    '@react-awesome-query-builder/bootstrap': BOOTSTRAP_MODULES,
-    '@react-awesome-query-builder/fluent': FLUENT_MODULES,
+
 } : {};
 
 let style_loaders = [{
@@ -67,7 +47,7 @@ const lazy_style_loaders = [
     loader: "style-loader", 
     options: {
         injectType: (
-            name && name.startsWith('@react-awesome-query-builder') || name === 'antd' || name === 'bootstrap' ?  
+            name && name.startsWith('@react-awesome-query-builder') || name === 'antd' ?  
             "lazyStyleTag" : "styleTag"
         )
     }
