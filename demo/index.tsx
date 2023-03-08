@@ -63,8 +63,8 @@ const initLogic: JsonLogicTree =
     ? (loadedInitLogic as JsonLogicTree)
     : undefined;
 let initTree: ImmutableTree;
-//initTree = checkTree(loadTree(initValue), loadedConfig);
-initTree = checkTree(loadFromJsonLogic(initLogic, loadedConfig), loadedConfig); // <- this will work same
+initTree = checkTree(loadTree(initValue), loadedConfig);
+// initTree = checkTree(loadFromJsonLogic(initLogic, loadedConfig), loadedConfig); // <- this will work same
 
 // Trick to hot-load new config when you edit `config.tsx`
 const updateEvent = new CustomEvent<CustomEventDetail>("update", {

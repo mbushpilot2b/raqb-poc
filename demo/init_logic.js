@@ -1,115 +1,36 @@
 export default {
-  and: [
+  "or": [
     {
-      "==": [
+      "some": [
         {
-          var: "auditScoreRationale"
-        },
-        "multiple"
-      ]
-    },
-    {
-      "==": [
-        {
-          var: "inCCIS"
-        },
-        true
-      ]
-    },
-    {
-      "==": [
-        {
-          var: "registerNumber"
-        },
-        "3007592"
-      ]
-    },
-    {
-      "==": [
-        {
-          var: "admissionDate"
-        }
-      ]
-    },
-    {
-      "==": [
-        {
-          var: "auditScore"
-        },
-        3
-      ]
-    },
-    {
-      some: [
-        {
-          var: "notes"
+          "var": "results"
         },
         {
-          and: [
+          ">": [
             {
-              "==": [
-                {
-                  var: "noteType"
-                },
-                "abc"
-              ]
+              "var": "score"
             },
-            {
-              "==": [
-                {
-                  var: "noteText"
-                },
-                "asdf"
-              ]
-            }
+            8
           ]
         }
       ]
     },
     {
-      ">": [
+      "some": [
         {
-          reduce: [
-            {
-              filter: [
-                {
-                  var: "cars"
-                },
-                {
-                  and: [
-                    {
-                      "==": [
-                        {
-                          var: "vendor"
-                        },
-                        "Toyota"
-                      ]
-                    },
-                    {
-                      ">=": [
-                        {
-                          var: "year"
-                        },
-                        2010
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "+": [
-                1,
-                {
-                  var: "accumulator"
-                }
-              ]
-            },
-            0
-          ]
+          "var": "results"
         },
-        2
+        {
+          "==": [
+            {
+              "var": "product"
+            },
+            "def"
+          ]
+        }
       ]
     }
   ]
-};
+}
+
+
