@@ -23,16 +23,9 @@ import {
   DateTimeFieldSettings
 } from "@react-awesome-query-builder/ui";
 import moment from "moment";
-import ru_RU from "antd/es/locale/ru_RU";
 import en_US from "antd/es/locale/en_US";
-import { ruRU } from "@material-ui/core/locale";
-import { ruRU as muiRuRU } from "@mui/material/locale";
 
 import { AntdConfig, AntdWidgets } from "@react-awesome-query-builder/antd";
-import { MuiConfig } from "@react-awesome-query-builder/mui";
-import { MaterialConfig } from "@react-awesome-query-builder/material";
-import { BootstrapConfig } from "@react-awesome-query-builder/bootstrap";
-import { FluentUIConfig } from "@react-awesome-query-builder/fluent";
 const {
   FieldSelect,
   FieldDropdown,
@@ -41,17 +34,8 @@ const {
 } = AntdWidgets;
 const { simulateAsyncFetch } = Utils.Autocomplete;
 
-const skinToConfig: Record<string, Config> = {
-  vanilla: BasicConfig,
-  antd: AntdConfig,
-  material: MaterialConfig,
-  mui: MuiConfig,
-  bootstrap: BootstrapConfig,
-  fluent: FluentUIConfig
-};
-
-export default (skin: string) => {
-  const InitialConfig = skinToConfig[skin] as BasicConfig;
+export default () => {
+  const InitialConfig = AntdConfig as BasicConfig;
 
   const demoListValues = [
     { title: "A", value: "a" },
@@ -237,8 +221,6 @@ export default (skin: string) => {
     locale: {
       moment: "en",
       antd: en_US,
-      material: ruRU,
-      mui: muiRuRU
     },
     valueLabel: "Value",
     valuePlaceholder: "Value",

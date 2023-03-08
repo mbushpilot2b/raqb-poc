@@ -51,9 +51,8 @@ const preErrorStyle = {
   padding: "10px"
 };
 
-const initialSkin = window._initialSkin || "antd";
 const emptyInitValue: JsonTree = { id: uuid(), type: "group" };
-const loadedConfig = loadConfig(initialSkin);
+const loadedConfig = loadConfig();
 let initValue: JsonTree =
   loadedInitValue && Object.keys(loadedInitValue).length > 0
     ? (loadedInitValue as JsonTree)
@@ -76,12 +75,6 @@ const updateEvent = new CustomEvent<CustomEventDetail>("update", {
 });
 window.dispatchEvent(updateEvent);
 
-declare global {
-  interface Window {
-    _initialSkin: string;
-  }
-}
-
 interface CustomEventDetail {
   config: Config;
   _initTree: ImmutableTree;
@@ -91,7 +84,6 @@ interface CustomEventDetail {
 interface DemoQueryBuilderState {
   tree: ImmutableTree;
   config: Config;
-  skin: string;
   spelStr: string;
   spelErrors: Array<string>;
 }
@@ -110,7 +102,6 @@ const DemoQueryBuilder: React.FC = () => {
   const [state, setState] = useState<DemoQueryBuilderState>({
     tree: initTree,
     config: loadedConfig,
-    skin: initialSkin,
     spelStr: "",
     spelErrors: [] as Array<string>
   });
@@ -172,18 +163,6 @@ const DemoQueryBuilder: React.FC = () => {
     });
   };
 
-  const changeSkin = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const skin = e.target.value;
-    const config = loadConfig(e.target.value);
-    setState({
-      ...state,
-      skin,
-      config,
-      tree: checkTree(state.tree, config)
-    });
-    window._initialSkin = skin;
-  };
-
   const clearValue = () => {
     setState({
       ...state,
@@ -219,115 +198,6 @@ const DemoQueryBuilder: React.FC = () => {
       config: memo.current.config
     }));
   }, 100);
-
-  // Demonstrates how actions can be called programmatically
-  const runActions = () => {
-    const rootPath = [state.tree.get("id") as string];
-    const isEmptyTree = !state.tree.get("children1");
-    const firstPath = [
-      state.tree.get("id"),
-      ((state.tree.get("children1") as ImmOMap)?.first() as ImmOMap)?.get("id")
-    ];
-    const lastPath = [
-      state.tree.get("id"),
-      ((state.tree.get("children1") as ImmOMap)?.last() as ImmOMap)?.get("id")
-    ];
-
-    // Change root group to NOT OR
-    memo.current._actions.setNot(rootPath, true);
-    memo.current._actions.setConjunction(rootPath, "OR");
-
-    // Move first item
-    if (!isEmptyTree) {
-      memo.current._actions.moveItem(firstPath, lastPath, "before");
-    }
-
-    // Remove last rule
-    if (!isEmptyTree) {
-      memo.current._actions.removeRule(lastPath);
-    }
-
-    // Change first rule to `num between 2 and 4`
-    if (!isEmptyTree) {
-      memo.current._actions.setField(firstPath, "num");
-      memo.current._actions.setOperator(firstPath, "between");
-      memo.current._actions.setValueSrc(firstPath, 0, "value");
-      memo.current._actions.setValue(firstPath, 0, 2, "number");
-      memo.current._actions.setValue(firstPath, 1, 4, "number");
-    }
-
-    // Add rule `login == "denis"`
-    memo.current._actions.addRule(rootPath, {
-      field: "user.login",
-      operator: "equal",
-      value: ["denis"],
-      valueSrc: ["value"],
-      valueType: ["text"]
-    });
-
-    // Add rule `login == firstName`
-    memo.current._actions.addRule(rootPath, {
-      field: "user.login",
-      operator: "equal",
-      value: ["user.firstName"],
-      valueSrc: ["field"]
-    });
-
-    // Add rule-group `cars` with `year == 2021`
-    memo.current._actions.addRule(
-      rootPath,
-      {
-        field: "cars",
-        mode: "array",
-        operator: "all"
-      },
-      "rule_group",
-      [
-        {
-          type: "rule",
-          properties: {
-            field: "cars.year",
-            operator: "equal",
-            value: [2021]
-          }
-        }
-      ]
-    );
-
-    // Add group with `slider == 40` and subgroup `slider < 20`
-    memo.current._actions.addGroup(
-      rootPath,
-      {
-        conjunction: "AND"
-      },
-      [
-        {
-          type: "rule",
-          properties: {
-            field: "slider",
-            operator: "equal",
-            value: [40]
-          }
-        },
-        {
-          type: "group",
-          properties: {
-            conjunction: "AND"
-          },
-          children1: [
-            {
-              type: "rule",
-              properties: {
-                field: "slider",
-                operator: "less",
-                value: [20]
-              }
-            }
-          ]
-        }
-      ]
-    );
-  };
 
   const renderResult = ({
     tree: immutableTree,
@@ -428,13 +298,13 @@ const DemoQueryBuilder: React.FC = () => {
           Tree:
           <pre style={preStyle}>{stringify(treeJs, undefined, 2)}</pre>
         </div>
-        {/* <hr/>
+        <hr/>
       <div>
         queryBuilderFormat: 
           <pre style={preStyle}>
             {stringify(queryBuilderFormat(immutableTree, config), undefined, 2)}
           </pre>
-      </div> */}
+      </div>
       </div>
     );
   };
@@ -442,24 +312,15 @@ const DemoQueryBuilder: React.FC = () => {
   return (
     <div>
       <div>
-        <select value={state.skin} onChange={changeSkin}>
-          <option key="vanilla">vanilla</option>
-          <option key="antd">antd</option>
-          <option key="material">material</option>
-          <option key="mui">mui</option>
-          <option key="bootstrap">bootstrap</option>
-          <option key="fluent">fluent</option>
-        </select>
         <button onClick={resetValue}>reset</button>
         <button onClick={clearValue}>clear</button>
-        <button onClick={runActions}>run actions</button>
         <button onClick={validate}>validate</button>
         <button onClick={switchShowLock}>
           show lock: {state.config.settings.showLock ? "on" : "off"}
         </button>
       </div>
 
-      <ImportSkinStyles skin={state.skin} />
+      <ImportSkinStyles />
 
       <Query
         {...state.config}
@@ -467,24 +328,6 @@ const DemoQueryBuilder: React.FC = () => {
         onChange={onChange}
         renderBuilder={renderBuilder}
       />
-      {/*
-      <div className="query-import-spel">
-        SpEL:
-        <input
-          type="text"
-          size={150}
-          value={state.spelStr}
-          onChange={onChangeSpelStr}
-        />
-        <button onClick={importFromSpel}>import</button>
-        <br />
-        {state.spelErrors.length > 0 && (
-          <pre style={preErrorStyle}>
-            {stringify(state.spelErrors, undefined, 2)}
-          </pre>
-        )}
-      </div>
-        */}
 
       <div className="query-builder-result">{renderResult(state)}</div>
     </div>
